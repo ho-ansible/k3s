@@ -1,0 +1,4 @@
+---
+k3s_role: master
+k3s_master: localhost
+k3s_env:

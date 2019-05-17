@@ -1,0 +1,21 @@
+galaxy_info:
+  author: Sean Ho
+  description: k3s Kubernetes distribution
+  company: Anchorlytics Consulting
+  license: MIT
+
+  min_ansible_version: 1.2
+
+  platforms:
+   - name: Debian
+     versions:
+     - stable
+     - 9
+
+  galaxy_tags:
+    - k3s
+    - kubernetes
+    - k8s
+
+dependencies: []
+
