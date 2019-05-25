@@ -1,6 +1,8 @@
 # Ansible Role: k3s
 Minimal distribution of Kubernetes container orchestration system.
 
+Uses k3s' own install script to setup the default configuration and systemd service.
+
 ## Requirements
 Only tested on Debian stable, for now.
 
