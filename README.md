@@ -12,6 +12,8 @@ Only tested on Debian stable, for now.
 + `k3s_env` (default: none): extra environment variables passed to the
   install script, e.g., `INSTALL_K3S_EXEC="--disable-agent"`
   to exclude host from set of worker nodes.
++ `k3s_version` (default: from latest Github release): which version
+  of k3s to install.
 + `k3s_install_tmp` (default: /tmp/k3s_install.tmp): where to save the
   k3s install script (just for installation, not the binary).
 
