@@ -2,8 +2,8 @@
 - name: k3s | fetch install script
   get_url:
     url: "{{ k3s_install_url }}"
-    dest: /tmp/install-k3s.sh
+    dest: "{{ k3s_install_tmp }}"
     mode: '0755'
 
 - name: k3s | run install script
-  shell: /tmp/install-k3s.sh
+  shell: "{{ k3s_install_tmp }}"

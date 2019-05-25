@@ -6,3 +6,5 @@ k3s_env:
 # curl -w '%{redirect_url}' -so /dev/null | sed 's/.*\/tag\///'
 #k3s_version: "{{ lookup('url', k3s_latest) | regex_replace('^.*\/tag\/') }}"
 k3s_version: v0.5.0
+
+k3s_install_tmp: /tmp/k3s_install.sh
