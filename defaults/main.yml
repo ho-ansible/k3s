@@ -3,7 +3,7 @@ k3s_role: master
 k3s_master: localhost
 k3s_env:
 
-# curl -w '%{redirect_url}' -so /dev/null | sed 's/.*\/tag\///'
+# curl -w '%{redirect_url}' -so /dev/null | sed 's|.*/||'
 #k3s_version: "{{ lookup('url', k3s_latest) | regex_replace('^.*\/tag\/') }}"
 k3s_version: v0.5.0
 
