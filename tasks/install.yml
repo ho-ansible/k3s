@@ -7,3 +7,4 @@
 
 - name: k3s | run install script
   shell: "{{ k3s_install_tmp }}"
+  environment: "{{ k3s_env }}"
