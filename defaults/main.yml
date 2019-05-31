@@ -1,6 +1,7 @@
 ---
 k3s_role: master
-k3s_master: localhost
+k3s_master: 
+k3s_url: https://localhost:6443/
 k3s_env:
 
 # curl -w '%{redirect_url}' -so /dev/null | sed 's|.*/||'
