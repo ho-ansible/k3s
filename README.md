@@ -7,8 +7,8 @@ Uses k3s' own install script to setup the default configuration and systemd serv
 Only tested on Debian stable, for now.
 
 ## Role Variables
-+ `k3s_role` (default: `master`): whether host is to be a Kubernetes
-  master or `agent`.
++ `k3s_role` (default: `server`): whether host is to be a Kubernetes
+  server (i.e., master) or `agent` (i.e., worker node).
 + `k3s_env` (default: none): extra environment variables passed to the
   install script, e.g., `INSTALL_K3S_EXEC="--disable-agent"`
   to exclude host from set of worker nodes.
@@ -18,10 +18,10 @@ Only tested on Debian stable, for now.
   k3s install script (just for installation, not the binary).
 
 ### Role Variables for Agents
-+ `k3s_master`: inventory name referring to master node.
-  The master stores the authentication token as a host fact.
++ `k3s_server`: inventory name referring to server node.
+  The server stores the authentication token as a host fact.
 + `k3s_url` (default: https://localhost:6443): how the agent is to
-  access the master.
+  access the server.
 
 ## Dependencies
 None.
