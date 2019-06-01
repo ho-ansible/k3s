@@ -1,3 +1,3 @@
 ---
-- include_tasks: install.yml
-- include_tasks: "{{ k3s_role }}.yml"
+- import_tasks: install.yml
+- import_tasks: "{{ k3s_role }}.yml"

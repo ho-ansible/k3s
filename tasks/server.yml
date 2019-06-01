@@ -1,9 +1,9 @@
 ---
-- name: k3s master | get token
+- name: k3s server | get token
   slurp:
     src: /var/lib/rancher/k3s/server/node-token
   register: k3s_token
 
-- name: k3s master | save token
+- name: k3s server | save token
   set_fact:
     k3s_token: "{{ k3s_token.content }}"

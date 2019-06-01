@@ -5,6 +5,16 @@
     dest: "{{ k3s_install_tmp }}"
     mode: '0755'
 
-- name: k3s | run install script
+- name: k3s server | run install script
   shell: "{{ k3s_install_tmp }}"
   environment: "{{ k3s_env }}"
+  when: k3s_role == "server"
+
+- name: k3s agent | run install script
+  shell: "{{ k3s_install_tmp }}"
+  environment: "{{ k3s_vars | combine(k3s_env) }}"
+  vars:
+    k3s_vars:
+      K3S_URL: "{{ k3s_url }}"
+      K3S_TOKEN: "{{ hostvars[k3s_master].k3s_token }}"
+  when: k3s_role != "server"
