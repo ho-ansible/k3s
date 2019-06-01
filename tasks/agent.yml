@@ -1,2 +1,6 @@
 ---
-
+- name: k3s agent | service config
+  template:
+    src: "{{ item }}.j2"
+    dest: /etc/systemd/system/{{ item }}
+  loop: "k3s-agent.service.env"
