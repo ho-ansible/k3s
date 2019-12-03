@@ -31,6 +31,10 @@
     state: started
     enabled: yes
 
+#TODO: handle multiple servers
+# get token from first server that has one
+# create token if no servers have tokens
+# sequence with starting systemd service
 - name: k3s | server | get token
   slurp:
     src: /var/lib/rancher/k3s/server/node-token

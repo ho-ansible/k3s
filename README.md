@@ -1,7 +1,10 @@
 # Ansible Role: k3s
 Minimal distribution of Kubernetes container orchestration system.
 
-Only the `k3s` binary is downloaded from GitHub.
++ Downloads `k3s` binary from GitHub
++ Creates systemd service from template
++ Saves token from server in hostvar
++ Copies token from server hostvar to node
 
 ## Requirements
 Debian stable amd64
