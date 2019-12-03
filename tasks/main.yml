@@ -37,7 +37,7 @@
 # sequence with starting systemd service
 - name: k3s | server | get token
   slurp:
-    src: /var/lib/rancher/k3s/server/node-token
+    src: "{{ k3s_token_file }}"
   register: k3s_token_reg
   when: k3s_servers in group_names
 
@@ -49,6 +49,6 @@
 - name: k3s | node | assign token
   template:
     src: node-token.j2
-    dest: /var/lib/rancher/k3s/server/node-token
+    dest: "{{ k3s_token_file }}"
   when: k3s_servers not in group_names
 

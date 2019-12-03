@@ -1,3 +1,4 @@
 ---
 k3s_install_url: "https://github.com/rancher/k3s/releases/download/{{ k3s_version }}/k3s"
 k3s_latest_url: "https://github.com/rancher/k3s/releases/latest"
+k3s_token_file: /var/lib/rancher/k3s/server/node-token
