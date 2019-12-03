@@ -1,11 +1,11 @@
 ---
-- name: k3s | fetch install script
+- name: k3s | download binary
   get_url:
     url: "{{ k3s_install_url }}"
     dest: /usr/local/bin/k3s
     mode: '0755'
 
-- name: k3s | sysctl 
+- name: k3s | enable forwarding
   sysctl:
     name: net.ipv4.ip_forward
     value: 1
@@ -17,7 +17,7 @@
       - overlay
   when: k3s_servers in group_names
 
-- name: k3s | systemd unit
+- name: k3s | systemd service
   template:
     src: "{{ item }}.j2"
     dest: "/etc/systemd/system/{{ item }}"
@@ -25,7 +25,7 @@
     - k3s.service
     - k3s.service.env
 
-- name: k3s | systemd service
+- name: k3s | enable service
   service:
     name: k3s
     state: started
@@ -46,7 +46,7 @@
     k3s_token: "{{ k3s_token_reg.content }}"
   when: k3s_servers in group_names
 
-- name: k3s | node | store token
+- name: k3s | node | assign token
   template:
     src: node-token.j2
     dest: /var/lib/rancher/k3s/server/node-token

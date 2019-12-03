@@ -1,7 +1,7 @@
 ---
 k3s_servers: k3s_server
 k3s_url: "https://localhost:6443/"
-k3s_env:
+k3s_env: []
 
 # curl -w '%{redirect_url}' -so /dev/null | sed 's|.*/||'
 #k3s_version: "{{ lookup('url', k3s_latest_url) | regex_replace('^.*\/tag\/') }}"
