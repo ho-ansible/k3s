@@ -31,10 +31,11 @@
     state: started
     enabled: yes
 
-#TODO: handle multiple servers
-# get token from first server that has one
-# create token if no servers have tokens
-# sequence with starting systemd service
+#TODO: write token to group var in inv
+# if I have token hostvar, template it to remote
+# start service
+# slurp remote token to hostvar
+# template hostvar to local "{{ inventory_dir }}/group_vars/{{ k3s_servers }}/k3s_token.yml"
 - name: k3s | server | get token
   slurp:
     src: "{{ k3s_token_file }}"
