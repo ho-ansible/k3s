@@ -1,11 +1,9 @@
 ---
-k3s_role: server
-k3s_server: 
+k3s_servers: k3s_server
 k3s_url: "https://localhost:6443/"
 k3s_env:
 
 # curl -w '%{redirect_url}' -so /dev/null | sed 's|.*/||'
-#k3s_version: "{{ lookup('url', k3s_latest) | regex_replace('^.*\/tag\/') }}"
-k3s_version: v0.5.0
+#k3s_version: "{{ lookup('url', k3s_latest_url) | regex_replace('^.*\/tag\/') }}"
+k3s_version: v1.0.0
 
-k3s_install_tmp: /tmp/k3s_install.sh
