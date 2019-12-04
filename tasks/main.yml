@@ -1,7 +1,7 @@
 ---
 - name: k3s | download binary
   get_url:
-    url: "{{ k3s_install_url }}"
+    url: "{{ k3s_bin_url }}"
     dest: /usr/local/bin/k3s
     mode: '0755'
 
@@ -15,7 +15,12 @@
     name:
       - br_netfilter
       - overlay
-  when: k3s_servers in group_names
+  when: k3s_mode is 'server'
+
+- name: k3s | token dir
+  file:
+    path: "{{ k3s_token_file | dirname }}"
+    state: directory
 
 - name: k3s | set token
   template:

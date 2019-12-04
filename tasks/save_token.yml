@@ -12,7 +12,7 @@
   become: false
   local_action:
     module: file
-    path: "{{ inventory_dir }}/group_vars/{{ k3s_servers }}"
+    path: "{{ k3s_token_varfile | dirname }}"
     state: directory
 
 - name: k3s | save_token | group var
@@ -20,5 +20,5 @@
   local_action:
     module: template
     src: k3s_token.yml.j2
-    dest: "{{ inventory_dir }}/group_vars/{{ k3s_servers }}/k3s_token.yml"
+    dest: "{{ k3s_token_varfile }}"
     mode: "0640"
