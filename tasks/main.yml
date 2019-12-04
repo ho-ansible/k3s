@@ -10,13 +10,6 @@
     name: net.ipv4.ip_forward
     value: 1
 
-- name: k3s | server | kernel modules
-  modprobe:
-    name:
-      - br_netfilter
-      - overlay
-  when: k3s_mode == 'server'
-
 - name: k3s | token dir
   file:
     path: "{{ k3s_token_file | dirname }}"
