@@ -11,7 +11,7 @@ Minimal distribution of Kubernetes container orchestration system.
 Debian stable amd64
 
 ## Role Variables
-+ `k3s_mode` (default: `server`): either `server` or `agent`
++ `k3s_mode` (default: `agent`): either `server` or `agent`
 + `k3s_group` (default: `k3s`): ansible inventory group
   containing all hosts in this k3s cluster (sharing a common token)
 + `k3s_url` (default: https://localhost:6443): how the agent is to

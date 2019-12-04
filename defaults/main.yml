@@ -1,5 +1,5 @@
 ---
-k3s_mode: server
+k3s_mode: agent
 k3s_group: k3s
 k3s_url: "https://localhost:6443/"
 
