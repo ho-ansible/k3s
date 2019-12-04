@@ -3,8 +3,8 @@ Minimal distribution of Kubernetes container orchestration system.
 
 + Downloads `k3s` binary from GitHub
 + Creates systemd service from template
-+ Saves token from server in hostvar
-+ Copies token from server hostvar to node
++ Saves token from server in inventory group var
++ Copies token to node
 
 ## Requirements
 Debian stable amd64

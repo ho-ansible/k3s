@@ -17,6 +17,12 @@
       - overlay
   when: k3s_servers in group_names
 
+- name: k3s | set token
+  template:
+    src: node-token.j2
+    dest: "{{ k3s_token_file }}"
+  when: k3s_token | d
+
 - name: k3s | systemd service
   template:
     src: "{{ item }}.j2"
@@ -31,11 +37,6 @@
     state: started
     enabled: yes
 
-#TODO: write token to group var in inv
-# if I have token hostvar, template it to remote
-# start service
-# slurp remote token to hostvar
-# template hostvar to local "{{ inventory_dir }}/group_vars/{{ k3s_servers }}/k3s_token.yml"
 - name: k3s | server | get token
   slurp:
     src: "{{ k3s_token_file }}"
@@ -45,11 +46,9 @@
 - name: k3s | server | save token
   set_fact:
     k3s_token: "{{ k3s_token_reg.content }}"
-  when: k3s_servers in group_names
 
-- name: k3s | node | assign token
-  template:
-    src: node-token.j2
-    dest: "{{ k3s_token_file }}"
-  when: k3s_servers not in group_names
-
+- name: k3s | server | store token in group vars
+  local_action:
+    module: template
+    src: k3s_token.yml.j2
+    dest: "{{ inventory_dir }}/group_vars/{{ k3s_servers }}/k3s_token.yml"
