@@ -8,8 +8,17 @@
   set_fact:
     k3s_token: "{{ k3s_token_reg.content }}"
 
+- name: k3s | save_token | group_vars dir
+  become: false
+  local_action:
+    module: file
+    path: "{{ inventory_dir }}/group_vars/{{ k3s_servers }}"
+    state: directory
+
 - name: k3s | save_token | group var
+  become: false
   local_action:
     module: template
     src: k3s_token.yml.j2
     dest: "{{ inventory_dir }}/group_vars/{{ k3s_servers }}/k3s_token.yml"
+    mode: "0640"
