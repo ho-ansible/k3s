@@ -16,8 +16,10 @@ Debian stable amd64
   containing all hosts in this k3s cluster (sharing a common token)
 + `k3s_url` (default: https://localhost:6443): how the agent is to
   access the server.
-+ `k3s_env` (default: empty): dict of additional environment variables
++ `k3s_env` (default: empty dict): additional environment variables
   for k3s (the binary, **not** the installer).
++ `k3s_opts` (default: empty string): additional command-line args.
+  In case of conflict, `opts` overrides `env`.
   See [k3s docs](https://rancher.com/docs/k3s/latest/en/installation/install-options/).
 + `k3s_version` (default: latest Github release): which version
   of k3s to install.
