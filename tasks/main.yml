@@ -4,6 +4,7 @@
     url: "{{ k3s_bin_url }}"
     dest: /usr/local/bin/k3s
     mode: '0755'
+  notify: restart k3s
 
 - name: k3s | enable forwarding
   sysctl:
@@ -19,7 +20,8 @@
   template:
     src: node-token.j2
     dest: "{{ k3s_token_file }}"
-  when: k3s_token | d
+  notify: restart k3s
+  when: k3s_token is defined
 
 - name: k3s | systemd service
   template:
@@ -28,6 +30,9 @@
   loop:
     - k3s.service
     - k3s.service.env
+  notify:
+    - daemon-reload
+    - restart k3s
 
 - name: k3s | enable service
   service:
@@ -35,4 +40,6 @@
     state: started
     enabled: yes
 
-- import_tasks: save_token.yml
+- include_tasks: save_token.yml
+  when: k3s_token is not defined
+
