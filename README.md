@@ -25,7 +25,7 @@ Debian stable amd64
   of k3s to install.
 
 ## Dependencies
-+ ho-ansible.systemd
++ [ho-ansible.systemd](https://github.com/ho-ansible/systemd)
 
 ## License
 MIT
