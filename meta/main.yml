@@ -17,4 +17,5 @@ galaxy_info:
     - kubernetes
     - k8s
 
-dependencies: []
+dependencies:
+  - systemd
