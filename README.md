@@ -14,12 +14,12 @@ Debian stable amd64
 + `k3s_mode` (default: `agent`): either `server` or `agent`
 + `k3s_group` (default: `k3s`): ansible inventory group
   containing all hosts in this k3s cluster (sharing a common token)
-+ `k3s_url` (default: https://localhost:6443): how the agent is to
-  access the server.
-+ `k3s_env` (default: empty dict): additional environment variables
-  for k3s (the binary, **not** the installer).
-+ `k3s_opts` (default: empty string): additional command-line args.
-  In case of conflict, `opts` overrides `env`.
++ `k3s_url` (default: https://localhost:6443):
+  how agents are to access the server.
++ `k3s_env`: dict of additional environment variables for k3s 
+  (the binary, **not** the installer).
++ `k3s_opts`: string of command-line args
+  (takes precedence over env vars).
   See [k3s docs](https://rancher.com/docs/k3s/latest/en/installation/install-options/).
 + `k3s_version` (default: latest Github release): which version
   of k3s to install.

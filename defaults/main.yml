@@ -3,7 +3,7 @@ k3s_mode: agent
 k3s_group: k3s
 k3s_url: "https://localhost:6443/"
 
-k3s_env: []
+k3s_env: {}
 k3s_opts:
 
 # curl -w '%{redirect_url}' -so /dev/null | sed 's|.*/||'
