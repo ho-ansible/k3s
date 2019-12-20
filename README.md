@@ -24,6 +24,10 @@ Debian stable amd64
 + `k3s_version` (default: latest Github release): which version
   of k3s to install.
 
+### Managed Variables
++ `k3s_token`: auto-generated if not present, and stored in a group var
+  for the entire `k3s_group`.
+
 ## Dependencies
 + [ho-ansible.systemd](https://github.com/ho-ansible/systemd)
 
@@ -41,3 +45,4 @@ with the following changes:
 + Pass token in file rather than command line arg
 + Token saved in inventory group var rather than cached fact of a single server
 + Omit copying a kube config file to user's dir
+
