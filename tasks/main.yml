@@ -11,11 +11,13 @@
     name: net.ipv4.ip_forward
     value: 1
 
-- name: k3s | token dir
+- name: k3s | create dirs
   file:
-    path: "{{ k3s_token_file | dirname }}"
+    path: "{{ item }}"
     state: directory
-  when: k3s_token is defined
+  loop:
+    - "{{ k3s_token_file | dirname }}"
+    - /etc/systemd/system/k3s.service.d
 
 - name: k3s | set token
   template:
@@ -26,11 +28,12 @@
 
 - name: k3s | systemd service
   template:
-    src: "{{ item }}.j2"
-    dest: "/etc/systemd/system/{{ item }}"
+    src: "{{ item.src }}.j2"
+    dest: "/etc/systemd/system/{{ item.dest | d() }}/{{ item.src }}"
   loop:
-    - k3s.service
-    - k3s.service.env
+    - { src: k3s.service }
+    - { src: k3s.service.env }
+    - { src: iptables.conf, dest: k3s.service.d }
   notify:
     - daemon-reload
     - restart k3s

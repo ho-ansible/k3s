@@ -20,6 +20,11 @@ Debian stable amd64
   (the binary, **not** the installer).
 + `k3s_opts`: string of command-line args
   (takes precedence over env vars).
++ `k3s_interface` (default: `{{ ansible_default_ipv4.interface }}`): 
+  network interface for internal communication.
+  For firewall only; also set node-ip, tls-san, etc.
++ `k3s_extra_iptables`: list of additional firewall rules for
+  `k3s_interface`.
   See [k3s docs](https://rancher.com/docs/k3s/latest/en/installation/install-options/).
 + `k3s_version` (default: latest Github release): which version
   of k3s to install.
