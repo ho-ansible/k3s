@@ -7,6 +7,10 @@ Minimal distribution of Kubernetes container orchestration system.
 + Saves token from server in inventory **group var**
 + Copies token to node
 
+To manage the cluster, copy `/etc/rancher/k3s/k3s.yaml` to your local
+workstation as `~/.kube/config`, and install kubectl (e.g., using the
+k3s binary).
+
 ## Requirements
 Debian stable amd64
 
