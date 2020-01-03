@@ -3,13 +3,16 @@
 {% set ipt = '/usr/sbin/iptables' %}
 {% set ch = 'in_k3s' %}
 {% set in_rule = '-i ' ~ k3s_interface ~ ' -j ' ~ ch %}
+{% set in_rule_cni = '-i cni0 -j ' ~ ch %}
 
 [Service]
 # Setup ref to chain
 ExecStartPre=!-{{ ipt }} -N {{ ch }}
 ExecStartPre=!{{ ipt }} -F {{ ch }}
 ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule }}
+ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule_cni }}
 ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule }}
+ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule_cni }}
 
 {% if k3s_mode == 'server' %}
 ExecStartPre=!{{ ipt }} -A {{ ch }} -p tcp --dport 6443 -j ACCEPT
@@ -23,5 +26,6 @@ ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
 
 # Cleanup: unref, flush, delete
 ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule }}
+ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule_cni }}
 ExecStopPost=!-{{ ipt }} -F {{ ch }}
 ExecStopPost=!-{{ ipt }} -X {{ ch }}
