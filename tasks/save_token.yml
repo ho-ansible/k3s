@@ -6,7 +6,7 @@
 
 - name: k3s | save_token | set fact
   set_fact:
-    k3s_token: "{{ k3s_token_reg.content }}"
+    k3s_token: "{{ k3s_token_reg.content | b64decode }}"
     cacheable: yes
 
 - name: k3s | save_token | group_vars dir
