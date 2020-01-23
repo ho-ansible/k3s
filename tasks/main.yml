@@ -19,13 +19,6 @@
     - "{{ k3s_token_file | dirname }}"
     - /etc/systemd/system/k3s.service.d
 
-- name: k3s | set token
-  template:
-    src: node-token.j2
-    dest: "{{ k3s_token_file }}"
-  notify: restart k3s
-  when: k3s_token is defined
-
 - name: k3s | systemd service
   template:
     src: "{{ item.src }}.j2"
