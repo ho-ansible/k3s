@@ -4,6 +4,7 @@
     url: "{{ k3s_bin_url }}"
     dest: /usr/local/bin/k3s
     mode: '0755'
+    force: yes
   notify: restart k3s
 
 - name: k3s | enable forwarding
