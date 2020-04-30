@@ -10,4 +10,4 @@ k3s_extra_iptables: []
 
 # curl -w '%{redirect_url}' -so /dev/null | sed 's|.*/||'
 #k3s_version: "{{ lookup('url', k3s_latest_url) | regex_replace('^.*\/tag\/') }}"
-k3s_version: v1.17.3+k3s1
+k3s_version: v1.17.4+k3s1
