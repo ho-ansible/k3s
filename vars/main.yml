@@ -1,7 +1,7 @@
 ---
 k3s_releases: "https://github.com/rancher/k3s/releases"
 k3s_bin_url: "{{ k3s_releases }}/download/{{ k3s_version }}/k3s"
-k3s_latest: "{{ k3s_releases }}/latest"
+k3s_latest_url: "{{ k3s_releases }}/latest"
 
 # on remote
 k3s_token_file: "/var/lib/rancher/k3s/server/node-token"
