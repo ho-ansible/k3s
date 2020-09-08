@@ -15,10 +15,10 @@ ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule }}
 ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule_cni }}
 
 # Chain contents
+ExecStartPre=!{{ ipt }} -A {{ ch }} -p tcp --dport 10250 -j ACCEPT
+ExecStartPre=!{{ ipt }} -A {{ ch }} -p udp --dport 8472 -j ACCEPT
 {% if k3s_mode == 'server' %}
 ExecStartPre=!{{ ipt }} -A {{ ch }} -p tcp --dport 6443 -j ACCEPT
-ExecStartPre=!{{ ipt }} -A {{ ch }} -p udp --dport 8472 -j ACCEPT
-ExecStartPre=!{{ ipt }} -A {{ ch }} -p tcp --dport 10250 -j ACCEPT
 {% endif %}
 {% for rule in k3s_extra_iptables | d %}
 ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
