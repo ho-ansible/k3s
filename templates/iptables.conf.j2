@@ -17,7 +17,7 @@ ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface }} -p tcp --dport 6443 -
 {% endif %}
 ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface}} -p udp --dport 8472 -j ACCEPT
 ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface}} -p tcp --dport 10250 -j ACCEPT
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i cni0 -j ACCEPT
+ExecStartPost=!{{ ipt }} -A {{ ch }} -i cni0 -j ACCEPT
 {% for rule in k3s_extra_iptables | d %}
 ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
 {% endfor %}
