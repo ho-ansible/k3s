@@ -2,14 +2,14 @@
 # Firewall rules for k3s service
 {% set ipt = '/usr/sbin/iptables' %}
 {% set ch = 'in_k3s' %}
-{% set in_rule = '-i ' ~ k3s_interface ~ ' -j ' ~ ch %}
+{% set in_rule = 'INPUT -i ' ~ k3s_interface ~ ' -j ' ~ ch %}
 
 [Service]
 # Setup ref to chain
 ExecStartPre=!-{{ ipt }} -N {{ ch }}
 ExecStartPre=!{{ ipt }} -F {{ ch }}
-ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule }}
-ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule }}
+ExecStartPre=!-{{ ipt }} -D {{ in_rule }}
+ExecStartPre=!{{ ipt }} -A {{ in_rule }}
 
 # Chain contents
 {% if k3s_mode == 'server' %}
@@ -23,6 +23,6 @@ ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
 {% endfor %}
 
 # Cleanup: unref, flush, delete
-ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule }}
+ExecStopPost=!-{{ ipt }} -D {{ in_rule }}
 ExecStopPost=!-{{ ipt }} -F {{ ch }}
 ExecStopPost=!-{{ ipt }} -X {{ ch }}
