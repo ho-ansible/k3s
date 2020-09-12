@@ -3,29 +3,26 @@
 {% set ipt = '/usr/sbin/iptables' %}
 {% set ch = 'in_k3s' %}
 {% set in_rule = '-i ' ~ k3s_interface ~ ' -j ' ~ ch %}
-{% set in_rule_cni = '-i cni0 -j ACCEPT' %}
 
 [Service]
 # Setup ref to chain
 ExecStartPre=!-{{ ipt }} -N {{ ch }}
 ExecStartPre=!{{ ipt }} -F {{ ch }}
 ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule }}
-ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule_cni }}
 ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule }}
-ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule_cni }}
 
 # Chain contents
-ExecStartPre=!{{ ipt }} -A {{ ch }} -p tcp --dport 10250 -j ACCEPT
-ExecStartPre=!{{ ipt }} -A {{ ch }} -p udp --dport 8472 -j ACCEPT
 {% if k3s_mode == 'server' %}
-ExecStartPre=!{{ ipt }} -A {{ ch }} -p tcp --dport 6443 -j ACCEPT
+ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface }} -p tcp --dport 6443 -j ACCEPT
 {% endif %}
+ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface}} -p udp --dport 8472 -j ACCEPT
+ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface}} -p tcp --dport 10250 -j ACCEPT
+ExecStartPre=!{{ ipt }} -A {{ ch }} -i cni0 -j ACCEPT
 {% for rule in k3s_extra_iptables | d %}
 ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
 {% endfor %}
 
 # Cleanup: unref, flush, delete
 ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule }}
-ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule_cni }}
 ExecStopPost=!-{{ ipt }} -F {{ ch }}
 ExecStopPost=!-{{ ipt }} -X {{ ch }}
