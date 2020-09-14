@@ -1,0 +1,16 @@
+---
+- name: k3s | disable services
+  service:
+    name: k3s
+    state: stopped
+    enabled: no
+
+- name: k3s | remove files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/systemd/system/k3s.service
+    - /etc/systemd/system/k3s.service.env
+    - /etc/systemd/system/k3s.service.d
+    - /usr/local/bin/k3s

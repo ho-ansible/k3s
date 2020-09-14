@@ -1,0 +1,12 @@
+#! /usr/bin/env ansible-playbook
+# Uninstall k3s kubernetes
+# Replace 'k8s' with your own inventory group
+---
+- name: k3s | uninstall
+  hosts: k8s
+  tasks:
+    - include_role:
+        name: k3s
+        tasks_from: uninstall.yml
+      tags:
+        - k3s

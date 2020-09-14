@@ -37,6 +37,11 @@ Debian stable amd64
 + `k3s_token`: auto-generated if not present, and stored in a group var
   for the entire `k3s_group`.
 
+## Playbooks
++ `main.yml`: apply role
++ `uninstall.yml`: remove. Run this before removing config from inventory.
+  Does not stop pods or remove `/var/lib/{rancher,kubelet,cni}`.
+
 ## Dependencies
 + [ho-ansible.systemd](https://github.com/ho-ansible/systemd)
 

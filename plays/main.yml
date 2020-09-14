@@ -1,0 +1,12 @@
+#! /usr/bin/env ansible-playbook
+# Configure k3s
+# Replace 'k8s' with your own inventory group
+---
+- name: k3s | kubernetes
+  hosts: k8s
+  roles:
+    - role: k3s
+      tags:
+        - k3s
+        - k8s
+        - kubernetes
