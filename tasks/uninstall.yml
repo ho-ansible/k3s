@@ -14,3 +14,5 @@
     - /etc/systemd/system/k3s.service.env
     - /etc/systemd/system/k3s.service.d
     - /usr/local/bin/k3s
+  - /usr/local/bin/kubectl
+  - /etc/bash_completion.d/kubectl

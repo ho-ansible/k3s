@@ -7,6 +7,17 @@
     force: yes
   notify: restart k3s
 
+- name: k3s | softlink kubectl
+  file:
+    src: k3s
+    dest: /usr/local/bin/kubectl
+    state: link
+
+- name: k3s | bash completion
+  shell:
+    cmd: /usr/local/bin/kubectl completion bash > /etc/bash_completion.d/kubectl
+    creates: /etc/bash_completion.d/kubectl
+
 - name: k3s | enable forwarding
   sysctl:
     name: net.ipv4.ip_forward
