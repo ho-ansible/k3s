@@ -28,20 +28,20 @@
     path: "{{ item }}"
     state: directory
   loop:
-    - "{{ k3s_token_file | dirname }}"
-    - /etc/systemd/system/k3s.service.d
+  - "{{ k3s_token_file | dirname }}"
+  - /etc/systemd/system/k3s.service.d
 
 - name: k3s | systemd service
   template:
     src: "{{ item.src }}.j2"
     dest: "/etc/systemd/system/{{ item.dest | d() }}/{{ item.src }}"
   loop:
-    - { src: k3s.service }
-    - { src: k3s.service.env }
-    - { src: iptables.conf, dest: k3s.service.d }
+  - { src: k3s.service }
+  - { src: k3s.service.env }
+  - { src: iptables.conf, dest: k3s.service.d }
   notify:
-    - daemon-reload
-    - restart k3s
+  - daemon-reload
+  - restart k3s
 
 - name: k3s | enable service
   service:

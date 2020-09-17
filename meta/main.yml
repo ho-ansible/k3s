@@ -7,15 +7,15 @@ galaxy_info:
   min_ansible_version: 1.2
 
   platforms:
-   - name: Debian
-     versions:
-     - stable
-     - 9
+  - name: Debian
+    versions:
+    - stable
+    - 10
 
   galaxy_tags:
-    - k3s
-    - kubernetes
-    - k8s
+  - k3s
+  - kubernetes
+  - k8s
 
 dependencies:
-  - systemd
+- systemd
