@@ -6,8 +6,7 @@ After=network-online.target
 
 [Service]
 Type=notify
-EnvironmentFile=/etc/systemd/system/k3s.service.env
-ExecStart=/usr/local/bin/k3s {{ k3s_mode }} {{ k3s_opts }}
+ExecStart=/usr/local/bin/k3s {{ k3s_mode }}
 KillMode=process
 Delegate=yes
 LimitNOFILE=infinity

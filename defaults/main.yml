@@ -4,8 +4,6 @@ k3s_group: k3s
 k3s_url: "https://localhost:6443/"
 k3s_interface: "{{ ansible_default_ipv4.interface }}"
 
-k3s_env: {}
-k3s_opts:
 k3s_extra_iptables: []
 
 # curl -w '%{redirect_url}' -so /dev/null | sed 's|.*/||'

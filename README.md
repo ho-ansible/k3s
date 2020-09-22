@@ -22,18 +22,15 @@ Debian stable amd64
 + `k3s_mode` (default: `agent`): either `server` or `agent`
 + `k3s_group` (default: `k3s`): ansible inventory group
   containing all hosts in this k3s cluster (sharing a common token)
-+ `k3s_url` (default: https://localhost:6443):
++ `k3s_url` (default: `https://localhost:6443`):
   how agents are to access the server.
-+ `k3s_env`: dict of additional environment variables for k3s 
-  (the binary, **not** the installer).
-+ `k3s_opts`: string of command-line args
-  (takes precedence over env vars).
++ `k3s_config`: dict of config options for `/etc/rancher/k3s/config.yaml`
 + `k3s_interface` (default: `{{ ansible_default_ipv4.interface }}`): 
-  network interface for internal communication.
-  For firewall only; also set node-ip, tls-san, etc.
+  Firewall rules allowing cluster-internal traffic are enabled for this 
+  interface.
+  K3s config like `bind-address`, `tls-san`, etc. should be set separately.
 + `k3s_extra_iptables`: list of additional firewall rules for
   `k3s_interface`.
-  See [k3s docs](https://rancher.com/docs/k3s/latest/en/installation/install-options/).
 + `k3s_version` (default: latest Github release): which version
   of k3s to install.
 
@@ -55,6 +52,7 @@ MIT
 ## Author Information
 Sean Ho, https://github.com/ho-ansible/
 
+## History
 This role borrows heavily from the [unofficial k3s ansible role](https://github.com/rancher/k3s/tree/master/contrib/ansible),
 with the following changes:
 + Ignore CentOS (sorry!)

@@ -1,9 +1,12 @@
 ---
 k3s_releases: "https://github.com/rancher/k3s/releases"
 k3s_bin_url: "{{ k3s_releases }}/download/{{ k3s_version }}/k3s"
-k3s_latest_url: "{{ k3s_releases }}/latest"
+#k3s_latest_url: "{{ k3s_releases }}/latest"
 
 # on remote
 k3s_token_file: "/var/lib/rancher/k3s/server/node-token"
 # on local
 k3s_token_varfile: "{{ inventory_dir }}/group_vars/{{ k3s_group }}/k3s_token.yml"
+
+k3s_iptables_conf: /etc/systemd/system/k3s.service.d/iptables.conf
+k3s_config_file: /etc/rancher/k3s/config.yaml

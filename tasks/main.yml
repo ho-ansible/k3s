@@ -3,8 +3,8 @@
   get_url:
     url: "{{ k3s_bin_url }}"
     dest: /usr/local/bin/k3s
-    mode: '0755'
-    force: yes
+    group: adm
+    mode: 0750
   notify: restart k3s
 
 - name: k3s | softlink kubectl
@@ -23,22 +23,32 @@
     name: net.ipv4.ip_forward
     value: 1
 
-- name: k3s | create dirs
+- name: k3s | dirs
   file:
-    path: "{{ item }}"
+    path: "{{ item | dirname }}"
     state: directory
   loop:
-  - "{{ k3s_token_file | dirname }}"
-  - /etc/systemd/system/k3s.service.d
+  - "{{ k3s_iptables_conf }}"
+  - "{{ k3s_config_file }}"
+
+- name: k3s | config
+  template:
+    src: config.yaml.j2
+    dest: "{{ k3s_config_file }}"
+    group: adm
+    mode: 0640
+  notify:
+  - restart k3s
 
 - name: k3s | systemd service
   template:
     src: "{{ item.src }}.j2"
-    dest: "/etc/systemd/system/{{ item.dest | d() }}/{{ item.src }}"
+    dest: "{{ item.dst }}"
   loop:
-  - { src: k3s.service }
-  - { src: k3s.service.env }
-  - { src: iptables.conf, dest: k3s.service.d }
+  - src: k3s.service
+    dst: /etc/systemd/system/k3s.service
+  - src: iptables.conf
+    dst: "{{ k3s_iptables_conf }}"
   notify:
   - daemon-reload
   - restart k3s
