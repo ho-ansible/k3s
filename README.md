@@ -29,10 +29,8 @@ Debian stable amd64
   Firewall rules allowing cluster-internal traffic are enabled for this 
   interface.
   K3s config like `bind-address`, `tls-san`, etc. should be set separately.
-+ `k3s_extra_iptables`: list of additional firewall rules for
-  `k3s_interface`.
-+ `k3s_version` (default: latest Github release): which version
-  of k3s to install.
++ `k3s_iptables`: list of additional firewall rules for `k3s_interface`.
++ `k3s_version` (default: latest Github release): which version to install.
 
 ### Managed Variables
 + `k3s_token`: auto-generated if not present, and stored in a group var
