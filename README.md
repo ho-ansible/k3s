@@ -45,10 +45,10 @@ Debian stable amd64
 + [ho-ansible.systemd](https://github.com/ho-ansible/systemd)
 
 ## License
-MIT
++ Ansible role licensed [MIT](LICENSE)
 
 ## Author Information
-Sean Ho, https://github.com/ho-ansible/
++ Ansible role by [Sean Ho](https://github.com/ho-ansible/)
 
 ## History
 This role borrows heavily from the [unofficial k3s ansible role](https://github.com/rancher/k3s/tree/master/contrib/ansible),
@@ -59,4 +59,3 @@ with the following changes:
 + Pass token in file rather than command line arg
 + Token saved in inventory group var rather than cached fact of a single server
 + Omit copying a kube config file to user's dir
-
