@@ -27,8 +27,8 @@ Debian stable amd64
 + `k3s_config`: dict of config options for `/etc/rancher/k3s/config.yaml`
 + `k3s_interface` (default: `{{ ansible_default_ipv4.interface }}`): 
   Firewall rules allowing cluster-internal traffic are enabled for this 
-  interface.
-  K3s config like `bind-address`, `tls-san`, etc. should be set separately.
+  interface.  Flannel is also configured to use this interface.
+  `bind-address`, `tls-san`, etc. should be set separately.
 + `k3s_iptables`: list of additional firewall rules for `k3s_interface`.
 + `k3s_version` (default: latest Github release): which version to install.
 

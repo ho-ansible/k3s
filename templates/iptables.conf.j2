@@ -3,6 +3,7 @@
 {% set ipt = '/usr/sbin/iptables' %}
 {% set ch = 'in_k3s' %}
 {% set in_rule = 'INPUT -j ' ~ ch %}
+{% set add_rule = ipt ~ ' -A ' ~ ch ~ ' -i ' ~ k3s_interface ~ ' -d ' ~ hostvars[inventory_hostname]['ansible_' ~ k3s_interface].ipv4.address %}
 
 [Service]
 # Setup ref to chain
@@ -12,14 +13,14 @@ ExecStartPre=!-{{ ipt }} -D {{ in_rule }}
 ExecStartPre=!{{ ipt }} -A {{ in_rule }}
 
 # Chain contents
+ExecStartPre=!{{ ipt }} -A {{ ch }} -i cni0 -d 10.42.0.0/16 -j ACCEPT
 {% if k3s_mode == 'server' %}
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface }} -p tcp --dport 6443 -j ACCEPT
+ExecStartPre=!{{ add_rule }} -p tcp --dport 6443 -j ACCEPT -m comment --comment api
 {% endif %}
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface }} -p udp --dport 8472 -j ACCEPT
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface }} -p tcp --dport 10250 -j ACCEPT
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i cni0 -j ACCEPT
+ExecStartPre=!{{ add_rule }} -p udp --dport 8472 -j ACCEPT -m comment --comment flannel
+ExecStartPre=!{{ add_rule }} -p tcp --dport 10250 -j ACCEPT -m comment --comment metrics
 {% for rule in k3s_iptables | d %}
-ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
+ExecStartPre=!-{{ add_rule }} {{ rule }}
 {% endfor %}
 
 # Cleanup: unref, flush, delete

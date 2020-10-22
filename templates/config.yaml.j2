@@ -7,4 +7,5 @@ server: "{{ k3s_url }}"
 token: "{{ k3s_token }}"
 {% endif %}
 
+flannel-iface: {{ k3s_interface }}
 {{ k3s_config | to_nice_yaml }}
