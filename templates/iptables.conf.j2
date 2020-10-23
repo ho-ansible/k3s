@@ -13,7 +13,7 @@ ExecStartPre=!-{{ ipt }} -D {{ in_rule }}
 ExecStartPre=!{{ ipt }} -A {{ in_rule }}
 
 # Chain contents
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i cni0 -d 10.42.0.0/16 -j ACCEPT
+ExecStartPre=!{{ ipt }} -A {{ ch }} -i cni0 -j ACCEPT
 {% if k3s_mode == 'server' %}
 ExecStartPre=!{{ add_rule }} -p tcp --dport 6443 -j ACCEPT -m comment --comment api
 {% endif %}
