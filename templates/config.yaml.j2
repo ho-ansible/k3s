@@ -2,9 +2,7 @@
 # {{ ansible_managed }}
 
 node-name: {{ inventory_hostname_short }}
-{% if k3s_mode != 'server' %}
 server: "{{ k3s_url }}"
-{% endif %}
 {% if k3s_token | d() %}
 token: "{{ k3s_token }}"
 {% endif %}
