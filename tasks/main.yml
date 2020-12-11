@@ -13,6 +13,10 @@
     dest: /usr/local/bin/kubectl
     state: link
 
+- name: k3s | bash completion package
+  package:
+    name: bash-completion
+
 - name: k3s | bash completion
   shell:
     cmd: /usr/local/bin/kubectl completion bash > /etc/bash_completion.d/kubectl
