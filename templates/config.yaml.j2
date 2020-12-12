@@ -2,10 +2,14 @@
 # {{ ansible_managed }}
 
 node-name: {{ inventory_hostname_short }}
+{% if k3s_url | d() %}
 server: "{{ k3s_url }}"
+{% endif %}
 {% if k3s_token | d() %}
 token: "{{ k3s_token }}"
 {% endif %}
-
+{% for label in k3s_labels %}
+node-label: {{ label }}
+{% endfor %}
 flannel-iface: {{ k3s_interface }}
 {{ k3s_config | to_nice_yaml }}
