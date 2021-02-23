@@ -7,4 +7,4 @@ k3s_labels: []
 k3s_interface: "{{ ansible_default_ipv4.interface }}"
 k3s_iptables: []
 
-k3s_version: v1.20.4+k3s1
+k3s_version: "{{ (lookup('url', k3s_latest_url) | from_json).name }}"
