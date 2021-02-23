@@ -9,4 +9,4 @@ k3s_token_file: "/var/lib/rancher/k3s/server/node-token"
 k3s_token_varfile: "{{ inventory_dir }}/group_vars/{{ k3s_group }}/k3s_token.yml"
 
 k3s_iptables_conf: /etc/systemd/system/k3s.service.d/iptables.conf
-k3s_config_file: /etc/rancher/k3s/config.yaml
+k3s_conf_dir: /etc/rancher/k3s

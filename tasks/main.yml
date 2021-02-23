@@ -37,10 +37,12 @@
 
 - name: k3s | config
   template:
-    src: config.yaml.j2
-    dest: "{{ k3s_config_file }}"
+    src: "{{ item }}.j2"
+    dest: "{{ k3s_conf_dir }}/{{ item }}"
     group: adm
     mode: 0640
+  loop:
+  - config.yaml
   notify:
   - restart k3s
 
