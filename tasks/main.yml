@@ -1,7 +1,8 @@
 ---
 - name: k3s | download binary
   get_url:
-    url: "{{ k3s_bin_url }}"
+    url: "{{ k3s_dl_url }}/k3s"
+    checksum: sha256:{{ k3s_dl_url }}/sha256sum-amd64.txt
     dest: /usr/local/bin/k3s
     group: adm
     mode: 0750
@@ -29,11 +30,11 @@
 
 - name: k3s | dirs
   file:
-    path: "{{ item | dirname }}"
+    path: "{{ item }}"
     state: directory
   loop:
-  - "{{ k3s_iptables_conf }}"
-  - "{{ k3s_config_file }}"
+  - /etc/systemd/system/k3s.service.d
+  - "{{ k3s_conf_dir }}"
 
 - name: k3s | config
   template:
@@ -48,13 +49,11 @@
 
 - name: k3s | systemd service
   template:
-    src: "{{ item.src }}.j2"
-    dest: "{{ item.dst }}"
+    src: "{{ item | basename }}.j2"
+    dest: /etc/systemd/system/{{ item }}
   loop:
-  - src: k3s.service
-    dst: /etc/systemd/system/k3s.service
-  - src: iptables.conf
-    dst: "{{ k3s_iptables_conf }}"
+  - k3s.service
+  - k3s.service.d/iptables.conf
   notify:
   - daemon-reload
   - restart k3s
