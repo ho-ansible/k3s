@@ -23,8 +23,9 @@ Debian stable amd64
 + `k3s_group` (default: `k3s`): ansible inventory group
   containing all hosts in this k3s cluster (sharing a common token)
 + `k3s_url` (default: none): API endpoint, e.g., `https://server:6443`.
-  If using high-availability etcd, first server should be initially started
-  with this empty, e.g., using `-e k3s_url=`.
+  Leave unset for server.
+  If using HA etcd, start first server with this empty, e.g., `-e k3s_url=`,
+  then after the URL is resolvable by another server, restart with URL set.
 + `k3s_labels`: list of `key=value` pairs to set as immutable node labels
 + `k3s_config`: dict of config options for `/etc/rancher/k3s/config.yaml`
 + `k3s_interface` (default: `{{ ansible_default_ipv4.interface }}`): 
