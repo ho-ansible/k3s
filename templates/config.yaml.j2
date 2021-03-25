@@ -12,5 +12,4 @@ token: "{{ k3s_token }}"
 node-label: {{ label }}
 {% endfor %}
 flannel-iface: {{ k3s_interface }}
-resolv-conf: {{ k3s_resolv_conf }}
 {{ k3s_config | to_nice_yaml }}

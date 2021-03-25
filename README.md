@@ -33,11 +33,6 @@ Debian stable amd64
   `bind-address`, `tls-san`, etc. should be set separately.
 + `k3s_iptables`: list of additional firewall rules
 + `k3s_version` (default: latest Github release): which version to install.
-+ `k3s_resolv_conf` (default: /dev/null): path to file to use instead of 
-  `/etc/resolv.conf` for kubelet.  An empty resolv.conf removes the
-  host's domain from the DNS search path, which is useful to workaround
-  an [issue with CloudFlare DNS](https://github.com/ho-ansible/k3s/issues/6)
-  with non-existent names on a DNSSEC-enabled domain.
 
 ### Managed Variables
 + `k3s_token`: auto-generated if not present, and stored in a group var
