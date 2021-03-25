@@ -31,7 +31,7 @@ Debian stable amd64
   Firewall rules allowing cluster-internal traffic are enabled for this 
   interface.  Flannel is also configured to use this interface.
   `bind-address`, `tls-san`, etc. should be set separately.
-+ `k3s_iptables`: list of additional firewall rules for `k3s_interface`.
++ `k3s_iptables`: list of additional firewall rules
 + `k3s_version` (default: latest Github release): which version to install.
 + `k3s_resolv_conf` (default: /dev/null): path to file to use instead of 
   `/etc/resolv.conf` for kubelet.  An empty resolv.conf removes the

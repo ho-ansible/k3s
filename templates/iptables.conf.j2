@@ -21,7 +21,7 @@ ExecStartPre=!{{ add_rule }} -p udp --dport 8472 -j ACCEPT -m comment --comment 
 ExecStartPre=!{{ add_rule }} -p tcp --dport 10250 -j ACCEPT -m comment --comment metrics
 ExecStartPre=!{{ add_rule }} -p tcp --dport 2379:2380 -j ACCEPT -m comment --comment etcd
 {% for rule in k3s_iptables | d %}
-ExecStartPre=!-{{ add_rule }} {{ rule }}
+ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
 {% endfor %}
 
 # Cleanup: unref, flush, delete
