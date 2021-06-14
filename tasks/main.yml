@@ -14,9 +14,11 @@
     dest: /usr/local/bin/kubectl
     state: link
 
-- name: k3s | bash completion package
+- name: k3s | auxiliary packages
   package:
-    name: bash-completion
+    name: 
+    - apparmor
+    - bash-completion
 
 - name: k3s | bash completion
   shell:
