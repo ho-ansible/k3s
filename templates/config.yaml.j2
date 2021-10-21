@@ -8,6 +8,9 @@ server: "{{ k3s_url }}"
 {% if k3s_token | d() %}
 token: "{{ k3s_token }}"
 {% endif %}
+{% if k3s_resolv_conf | d() %}
+resolv-conf: {{ k3s_conf_dir }}/resolv.conf
+{% endif %}
 {% for label in k3s_labels %}
 node-label: {{ label }}
 {% endfor %}

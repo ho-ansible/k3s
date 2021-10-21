@@ -28,7 +28,7 @@
 - name: k3s | enable forwarding
   sysctl:
     name: net.ipv4.ip_forward
-    value: 1
+    value: '1'
 
 - name: k3s | dirs
   file:
@@ -48,6 +48,14 @@
   - config.yaml
   notify:
   - restart k3s
+
+- name: k3s | resolv.conf
+  tags:
+  - config
+  copy:
+    content: "{{ k3s_resolv_conf }}"
+    dest: "{{ k3s_conf_dir }}/resolv.conf"
+  when: k3s_resolv_conf | length > 0
 
 - name: k3s | systemd service
   template:
