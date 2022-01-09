@@ -27,6 +27,7 @@ Debian stable amd64
   If using HA etcd, start first server with this empty, e.g., `-e k3s_url=`,
   then after the URL is resolvable by another server, restart with URL set.
 + `k3s_labels`: list of `key=value` pairs to set as immutable node labels
++ `k3s_taints`: list of values to set as immutable node taints
 + `k3s_config`: dict of config options for `/etc/rancher/k3s/config.yaml`
 + `k3s_interface` (default: `{{ ansible_default_ipv4.interface }}`): 
   Firewall rules allowing cluster-internal traffic are enabled for this 

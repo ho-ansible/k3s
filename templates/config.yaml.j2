@@ -14,4 +14,7 @@ resolv-conf: {{ k3s_conf_dir }}/resolv.conf
 {% for label in k3s_labels %}
 node-label: {{ label }}
 {% endfor %}
+{% for taint in k3s_taints %}
+node-taint: {{ taint }}
+{% endfor %}
 {{ k3s_config | to_nice_yaml }}
