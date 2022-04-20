@@ -4,6 +4,7 @@ k3s_group: k3s
 k3s_url: 
 k3s_config:
 k3s_resolv_conf:
+k3s_kubelet_conf:
 k3s_labels: []
 k3s_taints: []
 k3s_interface: "{{ ansible_default_ipv4.interface }}"

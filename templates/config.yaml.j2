@@ -11,6 +11,9 @@ token: "{{ k3s_token }}"
 {% if k3s_resolv_conf | d() %}
 resolv-conf: {{ k3s_conf_dir }}/resolv.conf
 {% endif %}
+{% if k3s_kubelet_conf | d() %}
+kubelet-arg: "config={{ k3s_conf_dir }}/kubelet.conf"
+{% endif %}
 {% for label in k3s_labels %}
 node-label: {{ label }}
 {% endfor %}

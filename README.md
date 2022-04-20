@@ -34,6 +34,7 @@ Debian stable amd64
   interface.
   `flannel-iface`, `bind-address`, `tls-san`, etc. should be set separately.
 + `k3s_resolv_conf`: contents of custom `resolv.conf` for kubelet
++ `k3s_kubelet_conf`: contents of custom config file for kubelet
 + `k3s_iptables`: list of additional firewall rules
 + `k3s_version` (default: latest Github release): which version to install.
 

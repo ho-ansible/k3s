@@ -57,6 +57,14 @@
     dest: "{{ k3s_conf_dir }}/resolv.conf"
   when: k3s_resolv_conf | length > 0
 
+- name: k3s | kubelet.conf
+  tags:
+  - config
+  copy:
+    content: "{{ k3s_kubelet_conf }}"
+    dest: "{{ k3s_conf_dir }}/kubelet.conf"
+  when: k3s_kubelet_conf | length > 0
+
 - name: k3s | systemd service
   template:
     src: "{{ item | basename }}.j2"
