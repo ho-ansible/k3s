@@ -4,6 +4,7 @@
 ---
 - name: k3s | kubernetes
   hosts: k8s
+  serial: "{{ k3s_rollout_size | d(omit) }}"
   roles:
   - role: k3s
     tags:

@@ -44,6 +44,7 @@ Debian stable amd64
 
 ## Playbooks
 + `main.yml`: apply role
+  + `k3s_rollout_size`: sets `serial` number of hosts (default all) to run at a time.
 + `uninstall.yml`: remove. Run this before removing config from inventory.
   Does not stop pods or remove `/var/lib/{rancher,kubelet,cni}`.
 
