@@ -18,7 +18,8 @@ ExecStartPre=!{{ ipt }} -A {{ ch }} -i cni0 -j ACCEPT
 ExecStartPre=!{{ add_rule }} -p tcp --dport 6443 -j ACCEPT -m comment --comment api
 {% endif %}
 ExecStartPre=!{{ add_rule }} -p udp --dport 8472 -j ACCEPT -m comment --comment flannel
-ExecStartPre=!{{ add_rule }} -p tcp --dport 10250 -j ACCEPT -m comment --comment metrics
+ExecStartPre=!{{ add_rule }} -p tcp --dport 10250 -j ACCEPT -m comment --comment kubelet
+ExecStartPre=!{{ add_rule }} -p tcp --dport 10248 -j ACCEPT -m comment --comment healthz
 ExecStartPre=!{{ add_rule }} -p tcp --dport 2379:2380 -j ACCEPT -m comment --comment etcd
 {% for rule in k3s_iptables | d %}
 ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
