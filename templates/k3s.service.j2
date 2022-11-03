@@ -2,7 +2,8 @@
 [Unit]
 Description=Lightweight Kubernetes
 Documentation=https://k3s.io
-After=network-online.target
+BindsTo=sys-subsystem-net-devices-{{ k3s_interface }}.device
+After=sys-subsystem-net-devices-{{ k3s_interface }}.device
 
 [Service]
 Type=notify
