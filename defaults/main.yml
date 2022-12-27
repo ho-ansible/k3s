@@ -2,12 +2,37 @@
 k3s_mode: agent
 k3s_group: k3s
 k3s_url: 
-k3s_config:
+k3s_config: 
 k3s_resolv_conf:
 k3s_kubelet_conf:
 k3s_labels: []
 k3s_taints: []
 k3s_interface: "{{ ansible_default_ipv4.interface }}"
+k3s_ip: "{{ hostvars[inventory_hostname]['ansible_' ~ k3s_interface].ipv4.address }}"
+k3s_external_ip:
+k3s_tls_san: []
 k3s_iptables: []
+
+k3s_ports_kubelet:
+- name: kubelet
+  proto: tcp
+  port: 10250
+- name: flannel
+  proto: udp
+  port: 8472
+
+k3s_ports_server:
+- name: api
+  proto: tcp
+  port: 6443
+- name: etcd
+  proto: tcp
+  port: "2379:2380"
+
+
+k3s_ports: "{{ vars | dict2items | 
+  selectattr('key', 'match', '^k3s_ports_') | 
+  map(attribute = 'value') |
+  flatten }}"
 
 k3s_version: "{{ (lookup('url', k3s_latest_url) | from_json).name }}"

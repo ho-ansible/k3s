@@ -29,14 +29,21 @@ Debian stable amd64
 + `k3s_labels`: list of `key=value` pairs to set as immutable node labels
 + `k3s_taints`: list of values to set as immutable node taints
 + `k3s_config`: dict of config options for `/etc/rancher/k3s/config.yaml`
-+ `k3s_interface` (default: `{{ ansible_default_ipv4.interface }}`): 
++ `k3s_interface` (default: `ansible_default_ipv4.interface`): 
   Firewall rules allowing cluster-internal traffic are enabled for this 
   interface.
-  `flannel-iface`, `bind-address`, `tls-san`, etc. should be set separately.
++ `k3s_ip` (default: follows `k3s_interface`): Address on above interface.
++ `k3s_external_ip`: address for NodePort etc.
 + `k3s_resolv_conf`: contents of custom `resolv.conf` for kubelet
 + `k3s_kubelet_conf`: contents of custom config file for kubelet
 + `k3s_iptables`: list of additional firewall rules
 + `k3s_version` (default: latest Github release): which version to install.
+
+### Server Variables
+The following role variables only apply to k3s servers / control nodes:
+
++ `k3s_tls_san`: list of SNI domain names to add to TLS cert
++ `k3s_disable`: list of services prepackaged with k3s to disable
 
 ### Managed Variables
 + `k3s_token`: auto-generated if not present, and stored in a group var
