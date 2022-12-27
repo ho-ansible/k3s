@@ -36,6 +36,8 @@ Debian stable amd64
 + `k3s_external_ip`: address for NodePort etc.
 + `k3s_resolv_conf`: contents of custom `resolv.conf` for kubelet
 + `k3s_kubelet_conf`: contents of custom config file for kubelet
++ `k3s_ports_*`: lists of dicts with keys `name`, `proto`, and `port`.
+  All matching role vars are concatenated and used to build firewall rules.
 + `k3s_iptables`: list of additional firewall rules
 + `k3s_version` (default: latest Github release): which version to install.
 

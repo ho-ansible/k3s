@@ -12,3 +12,8 @@ k3s_token_varfile: "{{ inventory_dir }}/group_vars/{{ k3s_group }}/k3s_token.yml
 k3s_conf_dir: /etc/rancher/k3s
 k3s_resolv_file: "{{ k3s_conf_dir }}/resolv.conf"
 k3s_kubelet_file: "{{ k3s_conf_dir }}/kubelet.conf"
+
+k3s_ports: "{{ vars | dict2items | 
+  selectattr('key', 'match', '^k3s_ports_') | 
+  map(attribute = 'value') |
+  flatten }}"
