@@ -32,14 +32,14 @@ resolv-conf: {{ k3s_resolv_file }}
 kubelet-arg: "config={{ k3s_kubelet_file }}"
 {% endif -%}
 
-{# define each label separately #}
-{% for label in k3s_labels %}
-node-label: {{ label }}
-{% endfor -%}
+{# define list of labels #}
+{% if k3s_labels | d() %}
+node-label: {{ k3s_labels | to_yaml }}
+{% endif -%}
 
-{% for taint in k3s_taints %}
-node-taint: {{ taint }}
-{% endfor -%}
+{% if k3s_taints | d() %}
+node-taint: {{ k3s_taints | to_yaml }}
+{% endif -%}
 
 {% if k3s_external_ip | d() %}
 node-external-ip: {{ k3s_external_ip }}
