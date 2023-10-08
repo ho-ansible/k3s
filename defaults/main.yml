@@ -8,7 +8,7 @@ k3s_kubelet_conf:
 k3s_labels: []
 k3s_taints: []
 k3s_interface: "{{ ansible_default_ipv4.interface }}"
-k3s_ip: "{{ hostvars[inventory_hostname]['ansible_' ~ k3s_interface].ipv4.address }}"
+k3s_ip: "{{ ansible_facts[k3s_interface].ipv4.address }}"
 k3s_external_ip:
 k3s_tls_san: []
 k3s_iptables: []
