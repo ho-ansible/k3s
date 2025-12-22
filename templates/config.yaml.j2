@@ -33,6 +33,7 @@ kubelet-arg: "config={{ k3s_kubelet_file }}"
 {% endif -%}
 
 {# define list of labels #}
+{% set k3s_labels = lookup('community.general.merge_variables', '^k3s_labels_?') %}
 {% if k3s_labels | d() %}
 node-label: {{ k3s_labels | to_yaml }}
 {% endif -%}
@@ -45,6 +46,7 @@ node-taint: {{ k3s_taints | to_yaml }}
 node-external-ip: {{ k3s_external_ip }}
 {% endif -%}
 
+{% set k3s_config = lookup('community.general.merge_variables', '^k3s_config_?') %}
 {% if k3s_config | d() %}
 {{ k3s_config | to_nice_yaml }}
 {% endif %}
