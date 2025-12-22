@@ -1,0 +1,12 @@
+#! /usr/bin/env ansible-playbook
+# Configure host for k3s admin
+---
+- name: k3s | kubernetes admin
+  hosts: k8s_admin
+  tasks:
+  - include_role:
+      name: k3s
+      tasks_from: admin.yml
+      defaults_from: admin.yml
+    tags:
+    - k3s

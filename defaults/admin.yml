@@ -1,0 +1,7 @@
+---
+k3s_pkgs:
+- apparmor
+- jq
+- yq
+- bash-completion
+

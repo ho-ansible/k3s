@@ -1,0 +1,11 @@
+---
+
+- name: k3s | auxiliary packages
+  package:
+    name: "{{ k3s_pkgs }}"
+
+- name: k3s | bash completion
+  shell:
+    cmd: /usr/local/bin/kubectl completion bash > /etc/bash_completion.d/kubectl
+    creates: /etc/bash_completion.d/kubectl
+
