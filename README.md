@@ -40,6 +40,7 @@ Debian stable amd64
   All matching role vars are concatenated and used to build firewall rules.
 + `k3s_iptables`: list of additional firewall rules
 + `k3s_version` (default: latest Github release): which version to install.
++ `k3s_pkgs` (default: `[apparmor]`): list of packages to install
 
 ### Server Variables
 The following role variables only apply to k3s servers / control nodes:

@@ -16,9 +16,7 @@
 
 - name: k3s | auxiliary packages
   package:
-    name: 
-    - apparmor
-    - bash-completion
+    name: "{{ k3s_pkgs }}"
 
 - name: k3s | bash completion
   shell:
