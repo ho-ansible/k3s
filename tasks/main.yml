@@ -26,9 +26,13 @@
     creates: /etc/bash_completion.d/kubectl
 
 - name: k3s | enable forwarding
-  sysctl:
-    name: net.ipv4.ip_forward
-    value: '1'
+  ansible.posix.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_file: /etc/sysctl.d/{{ item.file }}.conf
+  loop:
+  - { name: net.ipv4.ip_forward, value: '1', file: ip_forward }
+  - { name: fs.inotify.max_user_instances, value: '512', file: inotify }
 
 - name: k3s | dirs
   file:
