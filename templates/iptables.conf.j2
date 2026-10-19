@@ -2,8 +2,7 @@
 # Firewall rules for k3s service
 {% set ipt = '/usr/sbin/iptables' %}
 {% set ch = 'in_k3s' %}
-{% set in_rule = 'INPUT -j ' ~ ch %}
-{% set add_rule = ipt ~ ' -A ' ~ ch ~ ' -i ' ~ k3s_interface ~ ' -d ' ~ k3s_ip %}
+{% set in_rule = 'INPUT -j ' ~ ch ~ ' -i ' ~ k3s_interface %}
 
 [Service]
 # Setup ref to chain
@@ -14,7 +13,7 @@ ExecStartPre=!{{ ipt }} -A {{ in_rule }}
 
 # Chain contents
 {% for rule in k3s_ports | d %}
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ k3s_interface }} -d {{ k3s_ip }} -p {{ rule.proto }} --dport {{ rule.port }} -j ACCEPT -m comment --comment {{ rule.name }}
+ExecStartPre=!{{ ipt }} -A {{ ch }} -p {{ rule.proto }} --dport {{ rule.port }} -j ACCEPT -m comment --comment {{ rule.name }}
 {% endfor %}
 {% for rule in k3s_iptables | d %}
 ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
