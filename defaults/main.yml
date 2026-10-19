@@ -2,7 +2,7 @@
 k3s_mode: agent
 k3s_group: k3s
 k3s_url: 
-k3s_config: 
+k3s_config: {}
 k3s_resolv_conf:
 k3s_kubelet_conf:
 k3s_labels: []
@@ -30,3 +30,5 @@ k3s_ports_server:
   port: "2379:2380"
 
 k3s_version: "{{ (lookup('url', k3s_latest_url) | from_json).name }}"
+k3s_pkgs:
+- apparmor

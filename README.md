@@ -26,9 +26,9 @@ Debian stable amd64
   Leave unset for server.
   If using HA etcd, start first server with this empty, e.g., `-e k3s_url=`,
   then after the URL is resolvable by another server, restart with URL set.
-+ `k3s_labels`: list of `key=value` pairs to set as immutable node labels
++ `k3s_labels*`: list of `key=value` pairs to set as immutable node labels
 + `k3s_taints`: list of values to set as immutable node taints
-+ `k3s_config`: dict of config options for `/etc/rancher/k3s/config.yaml`
++ `k3s_config*`: dict of config options for `/etc/rancher/k3s/config.yaml`
 + `k3s_interface` (default: `ansible_default_ipv4.interface`): 
   Firewall rules allowing cluster-internal traffic are enabled for this 
   interface.
@@ -38,8 +38,9 @@ Debian stable amd64
 + `k3s_kubelet_conf`: contents of custom config file for kubelet
 + `k3s_ports_*`: lists of dicts with keys `name`, `proto`, and `port`.
   All matching role vars are concatenated and used to build firewall rules.
-+ `k3s_iptables`: list of additional firewall rules
++ `k3s_iptables*`: list of additional firewall rules
 + `k3s_version` (default: latest Github release): which version to install.
++ `k3s_pkgs` (default: `[apparmor]`): list of packages to install
 
 ### Server Variables
 The following role variables only apply to k3s servers / control nodes:
